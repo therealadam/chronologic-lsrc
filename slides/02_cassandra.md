@@ -10,7 +10,7 @@ With apologies to Dr. Richard Feynman
 * Keys and columns (objects)
 * Simple graphs (subscribers)
 * Timeline indexes (timelines)
-* Spread it around like a distributed database
+* Secondary indexes (comfort food)
 
 <!SLIDE code>
 
@@ -52,18 +52,4 @@ With apologies to Dr. Richard Feynman
     )
 
 <!SLIDE>
-
-    @@@ ruby
-    require 'cassandra/0.7'
-    
-    c = Cassandra.new('Keyspace1')
-    c.insert(
-      :Standard1,
-      'akk',
-      {
-        'username' => 'therealadam',
-        'age' => '32'
-      }
-    )
-    c.get(:Stanard1, 'akk')
 
