@@ -9,3 +9,5 @@ create column family Stuff with comparator = UTF8Type
 
 drop column family Users;
 drop column family Stuff;
+
+drop keyspace ImportantStuff;
