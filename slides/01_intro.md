@@ -18,13 +18,15 @@
 
 # It's Cassandra, it's whatever it wants to be
 
-(Zuul)
-
 <!SLIDE center bullets incremental>
+# It's like this thing...
 
 - Keys and values, like memcached or Riak
 - Keys and hashes, like Redis
 - Keys and sorted sets, like Redis
+
+<!SLIDE center bullets incremental>
+# It's like that other thing...
 - Keys and counters, like Redis
 - Keys and key/values, like MongoDB
 - Rows and columns, like MySQL or PostgreSQL
@@ -36,8 +38,7 @@
 - Each server in the cluster is on a "ring"
 - Data is stored and replicated along the ring
 - Each server in the ring knows about every other server
-- Connect to any server, do stuff
-- Tolerate servers going down
+- Connect to any server, do stuff, tolerate servers going down
 
 <!SLIDE center bullets incremental>
 
@@ -52,21 +53,21 @@
 
 # Why are we using Cassandra?
 
-<!SLIDE bullets incremental>
+<!SLIDE center bullets incremental>
 
 - Fast growing data: checkins, social graph, photos, comments, etc.
 - Data that benefits from prematerialized views: activity,
   notifications, etc.
 - Masterless design that accounts for redundancy and availability
 
-<!SLIDE>
+<!SLIDE center bullets incremental>
 
 # What are we using Cassandra for?
 
 - Audit: store change logs on AR models
 - Chronologic: activity stream data
 
-<!SLIDE>
+<!SLIDE center bullets incremental>
 
 # What would we use Cassandra for?
 
@@ -74,7 +75,7 @@
 - "Like" annotations
 - Out-of-band notifications
 
-<!SLIDE>
+<!SLIDE center bullets incremental>
 
 # What do I want to use Cassandra for in the future?
 
@@ -82,7 +83,7 @@
 - Replace Solr with Solrandra
 - Replace HDFS/Hadoop with CassandraFS + Brisk
 
-<!SLIDE>
+<!SLIDE center bullets incremental>
 
 # What wouldn't I use Cassandra for?
 
