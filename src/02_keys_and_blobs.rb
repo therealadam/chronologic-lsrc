@@ -1,6 +1,8 @@
 require 'cassandra'
 require 'yajl'
 
+# # Keys and blobs
+
 # Connect to a keyspace for this demo.
 c = Cassandra.new('lsrc')
 
