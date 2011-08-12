@@ -45,6 +45,9 @@
     @@@ sql
     drop keyspace ImportantStuff;
 
+<!SLIDE full-page center>
+![lol](ec77d9f5-fb71-4db6-8090-29b5b56d290e.jpg)
+
 <!SLIDE center>
 
 # Keys and Blobs
@@ -104,6 +107,10 @@
 
 <!SLIDE center>
 
+<!SLIDE full-page center>
+![lol](KermitConfused.png)
+
+<!SLIDE center>
 # Graphs!!!!
 
 <!SLIDE code>
@@ -243,3 +250,5 @@
     @@@ sql
     get Users where admin='true' and age > '18';
 
+<!SLIDE full-page center>
+![lol](pyramid-jumbo.jpg)

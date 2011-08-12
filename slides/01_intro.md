@@ -1,6 +1,10 @@
-<!SLIDE>
+<!SLIDE center>
 
-# Cassandra at Gowalla
+# Chronologic and Cassandra at Gowalla
+## Adam Keys
+### @therealadam
+
+![logo](chronologic.png)
 
 <!SLIDE bullets incremental>
 
@@ -48,6 +52,9 @@
 - Operate with quorum consistency
 - Operate with full consistency
 - Do any of this across racks or datacenters
+
+<!SLIDE full-page center>
+![lol](CorgiHaters.jpg)
 
 <!SLIDE>
 

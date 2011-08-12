@@ -35,6 +35,10 @@
 
 <!SLIDE center>
 
+<!SLIDE full-page center>
+![lol](tumblr_l6v7a4Potn1qa77fso1_500.jpg)
+
+<!SLIDE center>
 # Event fanout
 
 <!SLIDE code>
@@ -106,7 +110,6 @@
     pp feed['items'].first
 
 <!SLIDE center>
-
 # Events reference objects
 
 <!SLIDE code>
@@ -244,3 +247,6 @@
     feed = connection.timeline("friends:mt")
     pp feed['items'].first
 
+
+<!SLIDE full-page center>
+![lol](tumblr_l85hq0giwW1qaaf7to1_500.jpg)

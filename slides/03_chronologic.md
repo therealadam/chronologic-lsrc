@@ -1,7 +1,9 @@
 <!SLIDE center>
 # Chronologic
-
 ## A service for storing event data, related objects, social graphs, and assembling it into activity feeds.
+
+<!SLIDE center>
+![logo](chronologic.png)
 
 <!SLIDE center bullets incremental>
 # Events and object references
@@ -44,25 +46,45 @@
 - Chronologic app is implemented in Sinatra
 - Chronologic talks to a Cassandra cluster via Thrift
 
-<!SLIDE center bullets incremental>
+<!SLIDE full-page center>
+![lol](roflbot-JmlA.jpg)
+
+<!SLIDE center>
 # Internals
+
+<!SLIDE center bullets>
 
 - `Objects` stores replicated data as key/blob pairs, though this may
   change to leverage secondary indexes
+
+<!SLIDE center bullets full-page>
+![keys_and_columns](keys_and_columns.jpg)
+
+<!SLIDE center bullets>
 - `Subscriptions` maps timelines that are consumed as feeds to timelines
   that are written to by events. It also includes a backlink to do basic
   privacy checks. The storage structure maps subscriber keys to consumer
   timeline/user key pairs.
 
-<!SLIDE center bullets incremental>
-# Internals
+<!SLIDE center bullets full-page>
+![simple_graphs](simple_graphs.jpg)
+
+<!SLIDE center bullets>
 
 - `Events` stores all events as key/column structures. Each event stores
   blobs for event attributes, timelines, and referenced objects. A
   timestamp is also stored and used to generate index keys.
+
+<!SLIDE center bullets full-page>
+![key_and_blobs](keys_and_blobs.jpg)
+
+<!SLIDE center bullets>
 - `Timelines` are indexes that map a feed to a series of events. Each
   key represents one timeline; the column name/value pairs map sortable
   timestamps (as stored in the event) to a key into the `Events` CF.
+
+<!SLIDE center bullets full-page>
+![timeline_indexes](timeline_indexes.jpg)
 
 <!SLIDE center bullets incremental>
 # Internals
@@ -80,6 +102,9 @@
 - Events sometimes have subevents (e.g. a comment on a checkin). In this
   case, `Timelines` is read again to find events on the timeline for the
   event with subevents.
+
+<!SLIDE full-page center>
+![lol](Screen shot 2010-05-14 at 2.28.46 PM.png)
 
 <!SLIDE center bullets incremental>
 # Object API
