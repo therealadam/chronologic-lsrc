@@ -1,0 +1,920 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Chronologic: You Put Your Feeds In It</title>
+
+  <link rel="stylesheet" href="./css/reset.css" type="text/css"/>
+  <link rel="stylesheet" href="./css/showoff.css" type="text/css"/>
+
+  <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="./js/jquery.cycle.all.js"></script>
+	<script type="text/javascript" src="./js/jquery-print.js"></script>
+  <script type="text/javascript" src="./js/jquery.batchImageLoad.js"></script>
+
+  <script type="text/javascript" src="./js/jquery.doubletap-0.1.js"></script>
+
+  <script type="text/javascript" src="./js/fg.menu.js"></script>
+  <script type="text/javascript" src="./js/showoff.js"></script>
+  <script type="text/javascript" src="./js/jTypeWriter.js"> </script>
+  <script type="text/javascript" src="./js/sh_main.min.js"></script>
+  <script type="text/javascript" src="./js/core.js"></script>
+  <script type="text/javascript" src="./js/showoffcore.js"></script>
+
+  <link type="text/css" href="./css/fg.menu.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href="./css/theme/ui.all.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href="./css/sh_style.css" rel="stylesheet" >
+
+  
+
+  
+
+  <script type="text/javascript">
+  $(function(){
+    setupPreso(false, './');
+  });
+  </script>
+</head>
+
+<body>
+
+
+<a tabindex="0" href="#search-engines" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="navmenu"><span class="ui-icon ui-icon-triangle-1-s"></span>slides</a>
+<div id="navigation" class="hidden"></div>
+
+<div id="help">
+  <table>
+    <tr><td class="key">space, &rarr;</td><td>next slide</td></tr>
+    <tr><td class="key">&larr;</td><td>previous slide</td></tr>
+    <tr><td class="key">d</td><td>debug mode</td></tr>
+    <tr><td class="key">## &lt;ret&gt;</td><td>go to slide #</td></tr>
+    <tr><td class="key">c</td><td>table of contents (vi)</td></tr>
+    <tr><td class="key">f</td><td>toggle footer</td></tr>
+    <tr><td class="key">r</td><td>reload slides</td></tr>
+    <tr><td class="key">z</td><td>toggle help (this)</td></tr>
+  </table>
+</div>
+
+<div class="buttonNav">
+  <input type="submit" onClick="prevStep();" value="prev"/>
+  <input type="submit" onClick="nextStep();" value="next"/>
+</div>
+
+<div id="preso">loading presentation...</div>
+<div id="footer">
+  <span id="slideInfo"></span>
+  <span id="debugInfo"></span>
+  <span id="notesInfo"></span>
+</div>
+
+<div id="slides" class="offscreen" style="display:none;">
+<div class="slide" data-transition="none"><div class="content center" ref="slides/01_intro/1">
+<h1>Chronologic and Cassandra at Gowalla</h1>
+
+<h2>Adam Keys</h2>
+
+<h3>@therealadam</h3>
+
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/chronologic.png" alt="logo"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="slides/01_intro/2">
+<h1>What is Cassandra?</h1>
+
+<ul>
+<li>A persistent, distributed hashtable?</li>
+<li>A column-oriented, masterless database?</li>
+<li>A Dynamo/Bigtable thingy?</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/01_intro/3">
+<h1>YES</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/01_intro/4">
+<h1>It's Cassandra, it's whatever it wants to be</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/01_intro/5">
+<h1>It's like this thing...</h1>
+
+<ul>
+<li>Keys and values, like memcached or Riak</li>
+<li>Keys and hashes, like Redis</li>
+<li>Keys and sorted sets, like Redis</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/01_intro/6">
+<h1>It's like that other thing...</h1>
+
+<ul>
+<li>Keys and counters, like Redis</li>
+<li>Keys and key/values, like MongoDB</li>
+<li>Rows and columns, like MySQL or PostgreSQL</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/01_intro/7">
+<h1>But it's distributed!</h1>
+
+<ul>
+<li>Each server in the cluster is on a "ring"</li>
+<li>Data is stored and replicated along the ring</li>
+<li>Each server in the ring knows about every other server</li>
+<li>Connect to any server, do stuff, tolerate servers going down</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/01_intro/8">
+<ul>
+<li>Operate with no durability (memcached, Mongo)</li>
+<li>Operate with full durability (MySQL, PostgreSQL)</li>
+<li>Operate with no consistency</li>
+<li>Operate with quorum consistency</li>
+<li>Operate with full consistency</li>
+<li>Do any of this across racks or datacenters</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content full-page center" ref="slides/01_intro/9">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/CorgiHaters.jpg" alt="lol"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content" ref="slides/01_intro/10">
+<h1>Why are we using Cassandra?</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/01_intro/11">
+<ul>
+<li>Fast growing data: checkins, social graph, photos, comments, etc.</li>
+<li>Data that benefits from prematerialized views: activity,
+notifications, etc.</li>
+<li>Masterless design that accounts for redundancy and availability</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/01_intro/12">
+<h1>What are we using Cassandra for?</h1>
+
+<ul>
+<li>Audit: store change logs on AR models</li>
+<li>Chronologic: activity stream data</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/01_intro/13">
+<h1>What would we use Cassandra for?</h1>
+
+<ul>
+<li>Cache social graphs from other networks (FB, Twitter, etc.)</li>
+<li>"Like" annotations</li>
+<li>Out-of-band notifications</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/01_intro/14">
+<h1>What do I want to use Cassandra for in the future?</h1>
+
+<ul>
+<li>Replace Redis</li>
+<li>Replace Solr with Solrandra</li>
+<li>Replace HDFS/Hadoop with CassandraFS + Brisk</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/01_intro/15">
+<h1>What wouldn't I use Cassandra for?</h1>
+
+<ul>
+<li>Geo-searches</li>
+<li>Heap-based caches</li>
+<li>Normalized, relational data</li>
+<li>Small datasets</li>
+<li>Prototypes</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content title center" ref="slides/02_cassandra/1">
+<h1>Six Easy Pieces on Cassandra</h1>
+
+<h3>With apologies to Dr. Richard Feynman</h3>
+</div>
+</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="slides/02_cassandra/2">
+<ul>
+<li>Like SQL with beer goggles</li>
+<li>Keys and blobs (events)</li>
+<li>Keys and columns (objects)</li>
+<li>Simple graphs (subscribers)</li>
+<li>Timeline indexes (timelines)</li>
+<li>Secondary indexes (comfort food)</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/02_cassandra/3">
+<h1>SQL with beer goggles</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/4">
+<pre class="sh_sql"><code>create keyspace ImportantStuff;
+use ImportantStuff;</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/5">
+<pre class="sh_sql"><code>create column family Users;
+create column family Stuff 
+  with comparator = UTF8Type
+  and column_metadata=[
+    {column_name: things, 
+     validation_class: UTF8Type}
+  ];</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/6">
+<pre class="sh_sql"><code>drop column family Users;
+drop column family Stuff;</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/7">
+<pre class="sh_sql"><code>drop keyspace ImportantStuff;</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content full-page center" ref="slides/02_cassandra/8">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/ec77d9f5-fb71-4db6-8090-29b5b56d290e.jpg" alt="lol"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/02_cassandra/9">
+<h1>Keys and Blobs</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/10">
+<pre class="sh_ruby"><code>require 'cassandra'
+require 'yajl'
+
+c = Cassandra.new('lsrc')</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/11">
+<pre class="sh_ruby"><code>data = {
+  'username' =&gt; 'akk',
+  'age' =&gt; '31'
+}
+c.insert(
+  :example, 
+  'akk', 
+  {'data' =&gt; Yajl.dump(data)}
+)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/12">
+<pre class="sh_ruby"><code>p c.get(:example, 'akk')
+#     #&lt;OrderedHash {"data"=&gt;"{\"username\":\"akk\",\"age\":\"31\"}"}
+#     {"data"=&gt;1312742715985471}&gt;
+
+c.remove(:example, 'akk')</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/02_cassandra/13">
+<h1>Keys and columns</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/14">
+<pre class="sh_ruby"><code>columns = {
+  'username' =&gt; 'ak',
+  'age' =&gt; '31'
+}
+
+c.insert(:example, 'akk', columns)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/15">
+<pre class="sh_ruby"><code>p c.get(:example, 'akk')
+# &lt;OrderedHash {"username"=&gt;"ak", "age"=&gt;"31"}
+# {"username"=&gt;1312743932840327, "age"=&gt;1312743932840327}&gt;
+
+c.remove(:example, 'akk')</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/02_cassandra/16">
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content full-page center" ref="slides/02_cassandra/17">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/KermitConfused.png" alt="lol"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/02_cassandra/18">
+<h1>Graphs!!!!</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/19">
+<pre class="sh_ruby"><code>akk_graph = {
+  # RS follows AK and AK is friends with RS
+  'user_rs_feed' =&gt; 'user_rs',
+  # BF follows AK and AK is friends with BF
+  'user_bf_feed' =&gt; 'user_bf',       
+  # AM follows AK and AK is friends with AM
+  'user_am_feed' =&gt; 'user_am',       
+  # MT follows AK, but AK doesn't reciprocate
+  'user_mt_feed' =&gt; '' 
+}
+
+c.insert(:example, 'akk/graph', akk_graph)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/20">
+<pre class="sh_ruby"><code>graph = c.get(:example, 'akk/graph')
+
+followers = graph.keys
+
+friends = graph.values.reject {|u| u.empty?}
+
+c.remove(:example, 'akk/graph')</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/02_cassandra/21">
+<h1>Indexes (!)</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/22">
+<pre class="sh_ruby"><code>5.times do |i|
+  key = "event_#{i}"
+
+  event = {
+    'message' =&gt; "This is event #{i}"
+  }
+  c.insert(:example, key, event)
+
+  c.insert(
+    :example, 
+    'akk/feed', 
+    {i.to_s, key}
+  )
+end</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/23">
+<pre class="sh_ruby"><code>timeline = c.get(:example, 'akk/feed')
+# #&lt;OrderedHash {"0"=&gt;"event_0", 
+#    "1"=&gt;"event_1", "2"=&gt;"event_2", 
+#    "3"=&gt;"event_3", "4"=&gt;"event_4"}
+
+multi_events = c.multi_get(
+  :example, 
+  timeline.values
+)
+# {
+#   "event_0" =&gt; {"message =&gt; "This is event 0"},
+#   "event_1" =&gt; {"message =&gt; "This is event 1"},
+#   "event_2" =&gt; {"message =&gt; "This is event 2"},
+#   # etc.
+# }</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/24">
+<pre class="sh_ruby"><code># {
+#   "event_0" =&gt; {"message =&gt; "This is event 0"},
+#   "event_1" =&gt; {"message =&gt; "This is event 1"},
+#   "event_2" =&gt; {"message =&gt; "This is event 2"},
+#   # etc.
+# }
+events = multi_events.values
+
+multi_events.keys.each { |k| 
+  c.remove(:example, k)
+}
+c.remove(:example, 'akk/feed')</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/02_cassandra/25">
+<h1>Secondary indexes</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/26">
+<pre class="sh_sql"><code>create column family Users with
+  comparator=UTF8Type and
+  column_metadata=[
+    {column_name: username, 
+     validation_class: UTF8Type, 
+     index_type: KEYS},
+    {column_name: age, 
+     validation_class: UTF8Type, 
+     index_types: KEYS},
+    {column_name: bio, 
+     validation_class: UTF8Type},
+    {column_name: admin, 
+     validation_class: UTF8Type];</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/27">
+<pre class="sh_sql"><code>set Users['ak']['username'] = 'therealadam';
+set Users['ak']['age'] = '31';
+set Users['ak']['bio'] = 'Telling a joke.';
+set Users['ak']['admin'] = 'true';</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/28">
+<pre class="sh_sql"><code>set Users['mt']['username'] = 'mattt';
+set Users['mt']['age'] = '21';
+set Users['mt']['bio'] = 
+  'Contemplating the nature of language.';
+set Users['mt']['admin'] = 'true';</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/29">
+<pre class="sh_sql"><code>set Users['wn']['username'] = 'pengwynn';
+set Users['wn']['age'] = '73';
+set Users['wn']['bio'] = 'Hosting a podcast';
+set Users['wn']['admin'] = 'false';</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/02_cassandra/30">
+<pre class="sh_sql"><code>get Users where admin='true' and age &gt; '18';</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content full-page center" ref="slides/02_cassandra/31">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/pyramid-jumbo.jpg" alt="lol"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/03_chronologic/1">
+<h1>Chronologic</h1>
+
+<h2>A service for storing event data, related objects, social graphs, and assembling it into activity feeds.</h2>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/03_chronologic/2">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/chronologic.png" alt="logo"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/03_chronologic/3">
+<h1>Events and object references</h1>
+
+<ul>
+<li>People generate events (statuses, checkins, photos, TPS reports, etc.)</li>
+<li>Events refer to other objects (users, locations, photos, documents,
+etc.)</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/03_chronologic/4">
+<h1>Social graphs</h1>
+
+<ul>
+<li>People connect with other people (follow, friend, manage, report to,
+etc.)</li>
+<li>People want to know what other people are up to (status feed, checkin
+feed, photo feed, etc.)</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/03_chronologic/5">
+<h1>Applications replicate objects/social graph</h1>
+
+<ul>
+<li>Applications "record" referred objects (users, spots, etc.)</li>
+<li>Applications "subscribe" timelines to other timelines (follow, friend,
+etc.)</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/03_chronologic/6">
+<h1>Applications publish events</h1>
+
+<ul>
+<li>Applications "publish" events to timelines (checkin -&gt; user, spot)</li>
+<li>Chronologic saves the events and writes them to all the timelines that
+subscribe to that timeline</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/03_chronologic/7">
+<h1>Applications consume feeds</h1>
+
+<ul>
+<li>Applications "fetch" a timeline and get back a fully-materialized list
+of events, subevents, and objects that in one request</li>
+<li>Chronologic does this by replicating objects that are referred to by
+events and doing a fan-out write of all events to the relevant timelines</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/03_chronologic/8">
+<h1>Chronologic is a service...</h1>
+
+<ul>
+<li>Applications talk to a REST/JSON API</li>
+<li>Chronologic app is implemented in Sinatra</li>
+<li>Chronologic talks to a Cassandra cluster via Thrift</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content full-page center" ref="slides/03_chronologic/9">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/roflbot-JmlA.jpg" alt="lol"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/03_chronologic/10">
+<h1>Internals</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets" ref="slides/03_chronologic/11">
+<ul>
+<li><code>Objects</code> stores replicated data as key/blob pairs, though this may
+change to leverage secondary indexes</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets full-page" ref="slides/03_chronologic/12">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/keys_and_columns.jpg" alt="keys_and_columns"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets" ref="slides/03_chronologic/13">
+<ul>
+<li><code>Subscriptions</code> maps timelines that are consumed as feeds to timelines
+that are written to by events. It also includes a backlink to do basic
+privacy checks. The storage structure maps subscriber keys to consumer
+timeline/user key pairs.</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets full-page" ref="slides/03_chronologic/14">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/simple_graphs.jpg" alt="simple_graphs"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets" ref="slides/03_chronologic/15">
+<ul>
+<li><code>Events</code> stores all events as key/column structures. Each event stores
+blobs for event attributes, timelines, and referenced objects. A
+timestamp is also stored and used to generate index keys.</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets full-page" ref="slides/03_chronologic/16">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/keys_and_blobs.jpg" alt="key_and_blobs"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets" ref="slides/03_chronologic/17">
+<ul>
+<li><code>Timelines</code> are indexes that map a feed to a series of events. Each
+key represents one timeline; the column name/value pairs map sortable
+timestamps (as stored in the event) to a key into the <code>Events</code> CF.</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets full-page" ref="slides/03_chronologic/18">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/timeline_indexes.jpg" alt="timeline_indexes"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/03_chronologic/19">
+<h1>Internals</h1>
+
+<ul>
+<li>When an event is published, it is immediately stored in <code>Events</code>. Each
+timeline it specifies is then updated with an index entry pointing to
+the new event. Any subscribers to the updated timelines are then
+themselves updated.</li>
+<li>When a timeline is requested, a batch of columns are fetched from
+<code>Timelines</code> and then each event referenced by those columns is fetched
+from <code>Event</code>.</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/03_chronologic/20">
+<h1>Internals</h1>
+
+<ul>
+<li>Events sometimes have subevents (e.g. a comment on a checkin). In this
+case, <code>Timelines</code> is read again to find events on the timeline for the
+event with subevents.</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content full-page center" ref="slides/03_chronologic/21">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/Screen%20shot%202010-05-14%20at%202.28.46%20PM.png" alt="lol"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/03_chronologic/22">
+<h1>Object API</h1>
+
+<ul>
+<li><code>record</code>: <code>POST /objects</code></li>
+<li><code>unrecord</code>: <code>DELETE /objects</code></li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/03_chronologic/23">
+<h1>Social graph API</h1>
+
+<ul>
+<li><code>subscribe</code>: <code>POST /subscriptions</code></li>
+<li><code>unsubscribe</code>: <code>DELETE /subscriptions</code></li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/03_chronologic/24">
+<h1>Event API</h1>
+
+<ul>
+<li><code>publish</code>: <code>POST /events</code></li>
+<li><code>unpublish</code>: <code>DELETE /events</code></li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="slides/03_chronologic/25">
+<h1>Feed API</h1>
+
+<ul>
+<li><code>fetch</code>: 'GET /timelines'</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/04_examples/1">
+<h1>Hello, Chronologic</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/2">
+<pre class="sh_ruby"><code>connection = Chronologic::Client::Connection.new(
+  'http://localhost:9292'
+)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/3">
+<pre class="sh_ruby"><code>event = Chronologic::Event.new
+event.key = "story_1"
+event.timestamp = Time.now.utc
+event.data = {
+  "headline" =&gt; "First ever post in Chronologic!",
+  "lede" =&gt; "A monumental occasion for housecats everywhere.",
+  "body" =&gt; "There is currently a cat perched on my arm. This is normal, carry on!"
+}
+event.timelines = ['home']
+
+connection.publish(event)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/4">
+<pre class="sh_ruby"><code>feed = connection.timeline('home')
+
+puts "We found #{feed['count']} events."
+puts "That event looks just like this:"
+pp feed['items'].first</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/5">
+<pre><code>We found 1 events.
+That event looks just like this:
+{"data"=&gt;
+  {"body"=&gt;
+    "There is currently a cat perched on my arm. This is normal, carry on!",
+   "headline"=&gt;"First ever post in Chronologic!",
+   "lede"=&gt;"A monumental occasion for housecats everywhere."},
+ "timestamp"=&gt;"Sat Aug 13 15:57:21 UTC 2011",
+ "subevents"=&gt;[],
+ "key"=&gt;"story_1",
+ "objects"=&gt;{},
+ "timelines"=&gt;["home"]}
+</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/04_examples/6">
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content full-page center" ref="slides/04_examples/7">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/tumblr_l6v7a4Potn1qa77fso1_500.jpg" alt="lol"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/04_examples/8">
+<h1>Event fanout</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/9">
+<pre class="sh_ruby"><code>connection.subscribe("tech", "home")</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/10">
+<pre class="sh_ruby"><code>event = Chronologic::Event.new
+event.key = "story_1"
+event.timestamp = Time.now.utc
+event.data = {
+  "headline" =&gt; "First ever post in Chronologic!",
+  "lede" =&gt; "A monumental occasion for housecats everywhere.",
+  "body" =&gt; "There is currently a cat perched on my arm. This is normal, carry on!"
+}
+event.timelines = ["tech"]</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/11">
+<pre class="sh_ruby"><code>connection.publish(event)
+
+feed = connection.timeline("home")
+
+pp feed['items'].first</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/12">
+<pre><code>{"data"=&gt;
+  {"body"=&gt;
+    "There is currently a cat perched on my arm. This is normal, carry on!",
+   "headline"=&gt;"First ever post in Chronologic!",
+   "lede"=&gt;"A monumental occasion for housecats everywhere."},
+ "timestamp"=&gt;"Sat Aug 13 15:58:29 UTC 2011",
+ "subevents"=&gt;[],
+ "key"=&gt;"story_1",
+ "objects"=&gt;{},
+ "timelines"=&gt;["tech"]}
+</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/04_examples/13">
+<h1>Events beget subevents</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/14">
+<pre class="sh_ruby"><code>event = Chronologic::Event.new
+event.key = "story_1"
+event.timestamp = Time.now
+event.data = {
+  "headline" =&gt; "First ever post in Chronologic!",
+  "lede" =&gt; "A monumental occasion for housecats everywhere.",
+  "body" =&gt; "There is currently a cat perched on my arm. This is normal, carry on!"
+}
+event.timelines = ["home"]
+
+connection.publish(event)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/15">
+<pre class="sh_ruby"><code>subevent = Chronologic::Event.new
+subevent.key = "comment_1"
+subevent.timestamp = Time.now
+subevent.data = {
+  "message" =&gt; "LOL cats!"
+}
+subevent.parent = "story_1"
+subevent.timelines = ["story_1"]
+
+connection.publish(subevent)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/16">
+<pre class="sh_ruby"><code>feed = connection.timeline("home")
+
+pp feed['items'].first</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/17">
+<pre><code>{"data"=&gt;
+  {"body"=&gt;
+    "There is currently a cat perched on my arm. This is normal, carry on!",
+   "headline"=&gt;"First ever post in Chronologic!",
+   "lede"=&gt;"A monumental occasion for housecats everywhere."},
+ "timestamp"=&gt;"Sat Aug 13 16:00:17 UTC 2011",
+ "subevents"=&gt;
+  [{"data"=&gt;{"parent"=&gt;"story_1", "message"=&gt;"LOL cats!"},
+    "timestamp"=&gt;"Sat Aug 13 16:00:17 UTC 2011",
+    "subevents"=&gt;[],
+    "timelines"=&gt;["story_1"],
+    "objects"=&gt;{},
+    "key"=&gt;"comment_1"}],
+ "key"=&gt;"story_1",
+ "objects"=&gt;{},
+ "timelines"=&gt;["home"]}
+</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/04_examples/18">
+<h1>Events reference objects</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/19">
+<pre class="sh_ruby"><code>connection.record(
+  "author_1", 
+  {"name" =&gt; "Adam"}
+)
+connection.record(
+  "author_2", 
+  {"name" =&gt; "Fred Derp"}
+)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/20">
+<pre class="sh_ruby"><code>event = Chronologic::Event.new
+event.key = "story_1"
+event.timestamp = Time.now
+event.data = {
+  "headline" =&gt; "First ever post in Chronologic!",
+  "lede" =&gt; "A monumental occasion for housecats everywhere.",
+  "body" =&gt; "There is currently a cat perched on my arm. This is normal, carry on!"
+}
+event.objects = {"author" =&gt; ["author_1"]}
+event.timelines = ["home"]
+
+connection.publish(event)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/21">
+<pre class="sh_ruby"><code>subevent = Chronologic::Event.new
+subevent.key = "comment_1"
+subevent.timestamp = Time.now
+subevent.data = {
+  "message" =&gt; "LOL cats!"
+}
+subevent.parent = "story_1"
+subevent.objects = {"author" =&gt; ["author_2"]}
+subevent.timelines = ["story_1"]
+
+connection.publish(subevent)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/22">
+<pre class="sh_ruby"><code>feed = connection.timeline("home")
+
+pp feed['items'].first</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/23">
+<pre><code>{"data"=&gt;
+  {"body"=&gt;
+    "There is currently a cat perched on my arm. This is normal, carry on!",
+   "headline"=&gt;"First ever post in Chronologic!",
+   "lede"=&gt;"A monumental occasion for housecats everywhere."},
+ "timestamp"=&gt;"Sat Aug 13 16:01:48 UTC 2011",
+ "subevents"=&gt;
+  [{"data"=&gt;{"parent"=&gt;"story_1", "message"=&gt;"LOL cats!"},
+    "timestamp"=&gt;"Sat Aug 13 16:01:48 UTC 2011",
+    "subevents"=&gt;[],
+    "timelines"=&gt;["story_1"],
+    "objects"=&gt;{"author"=&gt;[{"name"=&gt;"Fred Derp"}]},
+    "key"=&gt;"comment_1"}],
+ "key"=&gt;"story_1",
+ "timelines"=&gt;["home"],
+ "objects"=&gt;{"author"=&gt;[{"name"=&gt;"Adam"}]}}
+</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/04_examples/24">
+<h1>A familiar social application</h1>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/25">
+<pre class="sh_ruby"><code>connection.record(
+  "user:ak", 
+  {"long_name" =&gt; "Adam Keys"}
+)
+connection.record(
+  "user:rs", 
+  {"long_name" =&gt; "Richard Schneeman"}
+)
+connection.record(
+  "user:mt", 
+  {"long_name" =&gt; "Mattt Thompson"}
+)
+connection.record(
+  "user:am", 
+  {"long_name" =&gt; "Adam Michaela"}
+)
+
+connection.record(
+  "spot:lsrc", 
+  {"name" =&gt; "Lone Star Ruby Conference"}
+)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/26">
+<pre class="sh_ruby"><code>connection.subscribe(
+  "passport:ak", 
+  "friends:rs"
+)
+connection.subscribe(
+  "passport:ak", 
+  "friends:am"
+ )
+connection.subscribe(
+  "passport:ak", 
+  "friends:mt"
+)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/27">
+<pre class="sh_ruby"><code>event = Chronologic::Event.new
+event.key = "checkin:1"
+event.timestamp = Time.now
+event.data = {"message" =&gt; "I'm giving a talk!"}
+event.objects = {
+  "user" =&gt; ["user:ak"], 
+  "spots" =&gt; ["spot:lsrc"]
+}
+event.timelines = ["passport:ak"]
+
+connection.publish(event)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/28">
+<pre class="sh_ruby"><code>subevent = Chronologic::Event.new
+subevent.key = "comment:1"
+subevent.timestamp = Time.now
+subevent.data = {"message" =&gt; "Me too!"}
+subevent.parent = "checkin:1"
+subevent.objects = {"user" =&gt; ["user:rs"]}
+subevent.timelines = ["checkin:1"]
+
+connection.publish(subevent)</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/29">
+<pre class="sh_ruby"><code>feed = connection.timeline("friends:rs")
+pp feed
+
+# Identical data
+connection.timeline("friends:am")
+connection.timeline("friends:mt")</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content code" ref="slides/04_examples/30">
+<pre><code>{"items"=&gt;
+  [{"data"=&gt;{"message"=&gt;"I'm giving a talk!"},
+    "timestamp"=&gt;"Sat Aug 13 16:05:02 UTC 2011",
+    "subevents"=&gt;
+     [{"data"=&gt;{"parent"=&gt;"checkin:1", "message"=&gt;"Me too!"},
+       "timestamp"=&gt;"Sat Aug 13 16:05:02 UTC 2011",
+       "subevents"=&gt;[],
+       "timelines"=&gt;["checkin:1"],
+       "objects"=&gt;{"user"=&gt;[{"long_name"=&gt;"Richard Schneeman"}]},
+       "key"=&gt;"comment:1"}],
+    "key"=&gt;"checkin:1",
+    "objects"=&gt;
+     {"spots"=&gt;[{"name"=&gt;"Lone Star Ruby Conference"}],
+      "user"=&gt;[{"long_name"=&gt;"Adam Keys"}]},
+    "timelines"=&gt;["passport:ak"]}],
+ "next_page"=&gt;"00000000-0000-0000-0004-aa6531470780",
+ "count"=&gt;1}
+</code></pre>
+</div>
+</div><div class="slide" data-transition="none"><div class="content full-page center" ref="slides/04_examples/31">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/tumblr_l85hq0giwW1qaaf7to1_500.jpg" alt="lol"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="slides/05_future/1">
+<h1>The future</h1>
+
+<ul>
+<li>Fix up README</li>
+<li>Add protocol docs</li>
+<li>Add API docs</li>
+<li>Put a bow on it</li>
+<li>Push 1.0 a gem</li>
+<li>Use the crap out of it at Gowalla</li>
+<li>Write adapters for other databases (MySQL, Redis, MongoDB, etc.)</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content bullets" ref="slides/05_future/2">
+<h1>Other possible hijinks</h1>
+
+<ul>
+<li>Sexyback: replace Redis with Cassandra for great win</li>
+<li>Become the John Nunemaker of Cassandra</li>
+<li>More distributed databases, fewer replicated/sharded databases</li>
+</ul>
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content full-page center" ref="slides/05_future/3">
+<p><img src="file:///Users/adam/Desktop/Do/chronologic-lsrc/slides/tumblr_l9zohiDZih1qa77fso1_500.jpg" alt="lol"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="slides/05_future/4">
+<h1>THANKS!</h1>
+</div>
+</div></div>
+
+</body>
+</html>
