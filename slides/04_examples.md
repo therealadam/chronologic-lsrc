@@ -33,6 +33,21 @@
     puts "That event looks just like this:"
     pp feed['items'].first
 
+<!SLIDE code>
+
+    We found 1 events.
+    That event looks just like this:
+    {"data"=>
+      {"body"=>
+        "There is currently a cat perched on my arm. This is normal, carry on!",
+       "headline"=>"First ever post in Chronologic!",
+       "lede"=>"A monumental occasion for housecats everywhere."},
+     "timestamp"=>"Sat Aug 13 15:57:21 UTC 2011",
+     "subevents"=>[],
+     "key"=>"story_1",
+     "objects"=>{},
+     "timelines"=>["home"]}
+
 <!SLIDE center>
 
 <!SLIDE full-page center>
@@ -66,8 +81,20 @@
 
     feed = connection.timeline("home")
 
-    puts "Home has #{feed['count']} events."
     pp feed['items'].first
+
+<!SLIDE code>
+
+    {"data"=>
+      {"body"=>
+        "There is currently a cat perched on my arm. This is normal, carry on!",
+       "headline"=>"First ever post in Chronologic!",
+       "lede"=>"A monumental occasion for housecats everywhere."},
+     "timestamp"=>"Sat Aug 13 15:58:29 UTC 2011",
+     "subevents"=>[],
+     "key"=>"story_1",
+     "objects"=>{},
+     "timelines"=>["tech"]}
 
 <!SLIDE center>
 
@@ -108,6 +135,25 @@
     feed = connection.timeline("home")
 
     pp feed['items'].first
+
+<!SLIDE code>
+
+    {"data"=>
+      {"body"=>
+        "There is currently a cat perched on my arm. This is normal, carry on!",
+       "headline"=>"First ever post in Chronologic!",
+       "lede"=>"A monumental occasion for housecats everywhere."},
+     "timestamp"=>"Sat Aug 13 16:00:17 UTC 2011",
+     "subevents"=>
+      [{"data"=>{"parent"=>"story_1", "message"=>"LOL cats!"},
+        "timestamp"=>"Sat Aug 13 16:00:17 UTC 2011",
+        "subevents"=>[],
+        "timelines"=>["story_1"],
+        "objects"=>{},
+        "key"=>"comment_1"}],
+     "key"=>"story_1",
+     "objects"=>{},
+     "timelines"=>["home"]}
 
 <!SLIDE center>
 # Events reference objects
@@ -161,6 +207,25 @@
     feed = connection.timeline("home")
 
     pp feed['items'].first
+
+<!SLIDE code>
+
+    {"data"=>
+      {"body"=>
+        "There is currently a cat perched on my arm. This is normal, carry on!",
+       "headline"=>"First ever post in Chronologic!",
+       "lede"=>"A monumental occasion for housecats everywhere."},
+     "timestamp"=>"Sat Aug 13 16:01:48 UTC 2011",
+     "subevents"=>
+      [{"data"=>{"parent"=>"story_1", "message"=>"LOL cats!"},
+        "timestamp"=>"Sat Aug 13 16:01:48 UTC 2011",
+        "subevents"=>[],
+        "timelines"=>["story_1"],
+        "objects"=>{"author"=>[{"name"=>"Fred Derp"}]},
+        "key"=>"comment_1"}],
+     "key"=>"story_1",
+     "timelines"=>["home"],
+     "objects"=>{"author"=>[{"name"=>"Adam"}]}}
 
 <!SLIDE center>
 
@@ -239,13 +304,31 @@
 
     @@@ ruby
     feed = connection.timeline("friends:rs")
-    pp feed['items'].first
+    pp feed
 
-    feed = connection.timeline("friends:am")
-    pp feed['items'].first
+    # Identical data
+    connection.timeline("friends:am")
+    connection.timeline("friends:mt")
 
-    feed = connection.timeline("friends:mt")
-    pp feed['items'].first
+<!SLIDE code>
+
+    {"items"=>
+      [{"data"=>{"message"=>"I'm giving a talk!"},
+        "timestamp"=>"Sat Aug 13 16:05:02 UTC 2011",
+        "subevents"=>
+         [{"data"=>{"parent"=>"checkin:1", "message"=>"Me too!"},
+           "timestamp"=>"Sat Aug 13 16:05:02 UTC 2011",
+           "subevents"=>[],
+           "timelines"=>["checkin:1"],
+           "objects"=>{"user"=>[{"long_name"=>"Richard Schneeman"}]},
+           "key"=>"comment:1"}],
+        "key"=>"checkin:1",
+        "objects"=>
+         {"spots"=>[{"name"=>"Lone Star Ruby Conference"}],
+          "user"=>[{"long_name"=>"Adam Keys"}]},
+        "timelines"=>["passport:ak"]}],
+     "next_page"=>"00000000-0000-0000-0004-aa6531470780",
+     "count"=>1}
 
 
 <!SLIDE full-page center>
